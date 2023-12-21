@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    const options = ["rock","paper","scissors"];
+    const outcomes = {
+        "rock":{
+            "scissors":1,
+            "paper":0
+        },
+        "scissors":{
+            "paper":1,
+            "rock":0
+        },
+        "paper":{
+            "rock":1,
+            "scissors":0
+        }
+    }
+
+    function getComputerChoice(){
+        var random = Math.floor(Math.random() * options.length);
+        var choice = options[random]
+        return choice
+    }
+
+    function getPlayerChoice(){
+        var choice = prompt("Choose between rock, paper, or scissors").toLowerCase();
+        if(options.includes(choice)){
+            return choice
+        }
+        else {
+            console.log("Please input a valid option!")
+        }
+
+    }
+
+    function playRound(){
+        var playerChoice = getPlayerChoice();
+        var computerChoice = getComputerChoice();
+        if(playerChoice === computerChoice){
+            outcome = "tie"
+            console.log("Tie!")
+        }
+        else{
+            var outcome = outcomes[playerChoice][computerChoice]
+            if(outcome){
+                console.log(`You win! ${playerChoice} beats ${computerChoice}`)
+                return outcome
+            }
+            else{
+                console.log(`You lose! ${computerChoice} beats ${playerChoice}`)
+                return outcome
+            }
+        }
+    }
+
+    function game(){
+        var playerWins = 0
+        var computerWins = 0
+        for(let i = 0; i < 5; i++){
+            outcome = playRound();
+            if(outcome){
+                playerWins++
+            }
+            else{
+                computerWins++
+            }
+        }
+        if(playerWins > computerWins){
+            console.log("You won the BO5!")
+        }
+        else if(computerWins > playerWins){
+            console.log("You lost the BO5!")
+        }
+        else{
+            console.log("You tied!")
+        }
+
+    }
+</script>
+<body>
+    
+</body>
+</html>
